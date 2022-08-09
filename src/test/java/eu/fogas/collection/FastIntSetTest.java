@@ -120,4 +120,37 @@ class FastIntSetTest {
         assertFalse(set.contains(1));
     }
 
+    @Test
+    void clear_shouldWorkAfterClear() {
+        FastIntSet set = new FastIntSet(3);
+        set.add(0);
+        set.add(1);
+
+        set.clear();
+        set.add(1);
+        set.add(2);
+
+        assertFalse(set.isEmpty());
+        assertEquals(2, set.size());
+        assertTrue(set.contains(1));
+        assertTrue(set.contains(2));
+        assertFalse(set.contains(0));
+    }
+
+    @Test
+    void clear_shouldWorkAfterClear2() {
+        FastIntSet set = new FastIntSet(3);
+        set.add(1);
+        set.add(0);
+
+        set.clear();
+        set.add(1);
+
+
+        assertFalse(set.isEmpty());
+        assertEquals(1, set.size());
+        assertTrue(set.contains(1));
+        assertFalse(set.contains(2));
+        assertFalse(set.contains(0));
+    }
 }

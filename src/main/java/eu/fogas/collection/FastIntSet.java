@@ -12,7 +12,7 @@ public class FastIntSet {
     public FastIntSet(int capacity) {
         values = new int[capacity];
         indexes = new int[capacity];
-        clear();
+        Arrays.fill(indexes, NOT_PRESENT);
     }
 
     public int size() {
@@ -33,13 +33,12 @@ public class FastIntSet {
     }
 
     public void clear() {
-        Arrays.fill(indexes, NOT_PRESENT);
         size = 0;
     }
 
     public boolean remove(int value) {
         int index = indexes[value];
-        if (isPresent(index)) {
+        if (isPresent(index, value)) {
             indexes[value] = NOT_PRESENT;
             values[index] = values[size--];
             indexes[values[index]] = index;
@@ -49,7 +48,7 @@ public class FastIntSet {
     }
 
     public boolean contains(int value) {
-        return isPresent(indexes[value]);
+        return isPresent(indexes[value], value);
     }
 
     public void iterate(Consumer<Integer> function) {
@@ -58,7 +57,7 @@ public class FastIntSet {
         }
     }
 
-    private boolean isPresent(int index) {
-        return index != NOT_PRESENT;
+    private boolean isPresent(int index, int value) {
+        return index != NOT_PRESENT && index < size && values[index] == value;
     }
 }

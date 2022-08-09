@@ -4,7 +4,6 @@ Initial fast set implementation for ints.
 It accepts ints [0..N) where N > 0 and N is huge.
 
 ## Future improvements
-- clear is slow it should be faster
 - set should be extendable
 - validate input values
 - add constructor to initialize the set with values
