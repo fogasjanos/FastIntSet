@@ -53,15 +53,8 @@ public class FastIntSet {
     }
 
     public void iterate(Consumer<Integer> function) {
-        int counter = 0;
-        for (int index : indexes) {
-            if (isPresent(index)) {
-                function.accept(values[index]);
-                counter++;
-            }
-            if (counter == size) {
-                break;
-            }
+        for (int value : values) {
+            function.accept(value);
         }
     }
 
