@@ -1,10 +1,8 @@
 package eu.fogas.collection;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class FastIntSet {
-    private static final int NOT_PRESENT = -1;
     private final int[] indexes;
     private final int[] values;
     private int size;
@@ -12,7 +10,6 @@ public class FastIntSet {
     public FastIntSet(int capacity) {
         values = new int[capacity];
         indexes = new int[capacity];
-        Arrays.fill(indexes, NOT_PRESENT);
     }
 
     public int size() {
@@ -37,9 +34,8 @@ public class FastIntSet {
     }
 
     public boolean remove(int value) {
-        int index = indexes[value];
-        if (isPresent(index, value)) {
-            indexes[value] = NOT_PRESENT;
+        if (contains(value)) {
+            int index = indexes[value];
             values[index] = values[size--];
             indexes[values[index]] = index;
             return true;
@@ -48,16 +44,13 @@ public class FastIntSet {
     }
 
     public boolean contains(int value) {
-        return isPresent(indexes[value], value);
+        int index = indexes[value];
+        return index < size && values[index] == value;
     }
 
     public void iterate(Consumer<Integer> function) {
         for (int i = 0; i < size; i++) {
             function.accept(values[i]);
         }
-    }
-
-    private boolean isPresent(int index, int value) {
-        return index != NOT_PRESENT && index < size && values[index] == value;
     }
 }

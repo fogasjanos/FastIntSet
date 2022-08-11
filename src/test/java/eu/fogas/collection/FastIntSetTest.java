@@ -16,8 +16,8 @@ class FastIntSetTest {
         FastIntSet set = new FastIntSet(3);
 
         assertTrue(set.isEmpty());
-        assertTrue(set.add(1));
-        assertTrue(set.contains(1));
+        assertTrue(set.add(0));
+        assertTrue(set.contains(0));
         assertEquals(1, set.size());
     }
 
@@ -32,6 +32,18 @@ class FastIntSetTest {
         assertFalse(set.add(1));
         assertTrue(set.contains(1));
         assertEquals(1, set.size());
+    }
+
+    @Test
+    void add_shouldReturnTrue_whenValueIsNotPresent() {
+        FastIntSet set = new FastIntSet(3);
+        assertTrue(set.isEmpty());
+
+        set.add(1);
+
+        assertTrue(set.contains(1));
+        assertFalse(set.contains(0));
+        assertFalse(set.isEmpty());
     }
 
     @Test
@@ -61,6 +73,21 @@ class FastIntSetTest {
         set.add(1);
 
         assertTrue(set.contains(1));
+    }
+
+    @Test
+    void contains_shouldWork_whenClearWasCalledBefore() {
+        FastIntSet set = new FastIntSet(5);
+        set.add(0);
+        set.add(1);
+        set.add(2);
+        set.clear();
+
+        set.add(1);
+        set.add(0);
+
+        assertTrue(set.contains(1));
+        assertFalse(set.contains(2));
     }
 
     @Test
