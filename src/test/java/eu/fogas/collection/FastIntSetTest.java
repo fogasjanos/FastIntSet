@@ -15,34 +15,44 @@ class FastIntSetTest {
     void add_shouldAddElement_whenValueIsNotPresent() {
         FastIntSet set = new FastIntSet(3);
 
+        assertTrue(set.isEmpty());
         assertTrue(set.add(1));
         assertTrue(set.contains(1));
+        assertEquals(1, set.size());
     }
 
     @Test
     void add_shouldNotAddElement_whenValueIsPresent() {
         FastIntSet set = new FastIntSet(3);
 
+        assertTrue(set.isEmpty());
         assertTrue(set.add(1));
         assertTrue(set.contains(1));
+        assertEquals(1, set.size());
         assertFalse(set.add(1));
         assertTrue(set.contains(1));
+        assertEquals(1, set.size());
     }
 
     @Test
     void remove_shouldReturnFalse_whenValueIsNotPresent() {
         FastIntSet set = new FastIntSet(3);
 
+        assertTrue(set.isEmpty());
         assertFalse(set.remove(1));
+        assertTrue(set.isEmpty());
     }
 
     @Test
     void remove_shouldReturnTrue_whenValueIsPresent() {
         FastIntSet set = new FastIntSet(3);
+        assertTrue(set.isEmpty());
+
         set.add(1);
 
         assertTrue(set.remove(1));
         assertFalse(set.contains(1));
+        assertTrue(set.isEmpty());
     }
 
     @Test
@@ -69,7 +79,21 @@ class FastIntSetTest {
         expected.add(1);
         expected.add(2);
 
-        set.iterate(expected::remove);
+        set.iterate(e -> assertTrue(expected.remove(e), "Cannot find: " + e));
+
+        assertTrue(expected.isEmpty());
+    }
+
+    @Test
+    void clear_thenIterate_shouldIterateOnEmpty() {
+        FastIntSet set = new FastIntSet(3);
+        set.add(1);
+        set.add(2);
+        set.add(0);
+        set.clear();
+        Set<Integer> expected = new HashSet<>();
+
+        set.iterate(e -> assertTrue(expected.remove(e), "Cannot find: " + e));
 
         assertTrue(expected.isEmpty());
     }

@@ -52,8 +52,8 @@ public class FastIntSet {
     }
 
     public void iterate(Consumer<Integer> function) {
-        for (int value : values) {
-            function.accept(value);
+        for (int i = 0; i < size; i++) {
+            function.accept(values[i]);
         }
     }
 
