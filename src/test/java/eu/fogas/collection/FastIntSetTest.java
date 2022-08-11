@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -203,5 +204,17 @@ class FastIntSetTest {
         assertTrue(set.contains(1));
         assertFalse(set.contains(2));
         assertFalse(set.contains(0));
+    }
+
+    @Test
+    void toArray_shouldReturnAnArrayViewOfTheSet() {
+        FastIntSet set = new FastIntSet(3);
+        set.add(1);
+        set.add(0);
+
+        var result = set.toArray();
+        set.add(2);
+
+        assertArrayEquals(new int[]{1, 0}, result);
     }
 }
