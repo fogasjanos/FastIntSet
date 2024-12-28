@@ -6,20 +6,20 @@
 
     <groupId>eu.fogas</groupId>
     <artifactId>FastIntSet</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <description>Fast int set implementation</description>
 
     <properties>
-        <java.version>18</java.version>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.9.0</version>
+            <version>5.11.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
